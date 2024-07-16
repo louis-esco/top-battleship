@@ -12,11 +12,72 @@ function screenController() {
   const p1BoardDiv = document.querySelector(".grid-cells.p1");
   const p2BoardDiv = document.querySelector(".grid-cells.p2");
   const boardArr = [p1BoardDiv, p2BoardDiv];
+  const gameBtns = document.querySelector(".game-btns");
 
   p1NameDiv.textContent = game.players[0].name;
   p2NameDiv.textContent = game.players[1].name;
 
-  function updateScreen() {
+  function placeShipScreen() {
+    gameStatusDiv.textContent = "Place your ships !";
+    gameBtns.textContent = "";
+
+    for (let [index, player] of game.players.entries()) {
+      const gameboard = game.getPlayerBoard(player);
+      const boardDiv = boardArr[index];
+
+      boardDiv.textContent = "";
+
+      for (let row of gameboard) {
+        for (let cell of row) {
+          const cellBtn = document.createElement("button");
+          cellBtn.classList.add("cell-btn");
+
+          if (cell.hasShip() && player.type === "real")
+            cellBtn.classList.add("empty-cell-hit");
+
+          if (player.type === "computer") cellBtn.disabled = true;
+
+          boardDiv.appendChild(cellBtn);
+        }
+      }
+
+      if (player.type === "real") {
+        const randomShipsBtn = document.createElement("button");
+        randomShipsBtn.classList.add("game-btn");
+        randomShipsBtn.textContent = "Random placement";
+
+        randomShipsBtn.addEventListener("click", () => {
+          game.placeShipsRandomly(player);
+          placeShipScreen();
+        });
+
+        const startGameBtn = document.createElement("button");
+        startGameBtn.classList.add("game-btn");
+        startGameBtn.textContent = "Start game";
+
+        startGameBtn.addEventListener("click", () => {
+          launchGame();
+        });
+
+        gameBtns.appendChild(randomShipsBtn);
+        gameBtns.appendChild(startGameBtn);
+      }
+    }
+  }
+
+  function launchGame() {
+    gameBtns.textContent = "";
+
+    const restartBtn = document.createElement("button");
+    restartBtn.textContent = "Restart game";
+    restartBtn.classList.add("game-btn");
+    restartBtn.addEventListener("click", placeShipScreen);
+    gameBtns.appendChild(restartBtn);
+
+    updateGameScreen();
+  }
+
+  function updateGameScreen() {
     gameStatusDiv.textContent = game.checkWinner()
       ? `${game.getActivePlayer().name} has won the game !`
       : `It's ${game.getActivePlayer().name}'s turn`;
@@ -52,13 +113,13 @@ function screenController() {
           cellBtn.addEventListener("click", () => {
             game.playRound(x, y);
             if (!game.checkWinner()) game.switchPlayerTurn();
-            updateScreen();
+            updateGameScreen();
 
             if (game.getActivePlayer().type === "computer") {
               setTimeout(() => {
                 game.makeComputerPlay();
                 if (!game.checkWinner()) game.switchPlayerTurn();
-                updateScreen();
+                updateGameScreen();
               }, 0);
             }
           });
@@ -69,7 +130,8 @@ function screenController() {
       }
     }
   }
-  updateScreen();
+  //   updateGameScreen();
+  placeShipScreen();
 }
 
 screenController();
