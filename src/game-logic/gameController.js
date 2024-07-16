@@ -41,4 +41,8 @@ export class GameController {
   getPlayerBoard() {
     return this.activePlayer.gameboard.board;
   }
+
+  placeShipsRandomly(player) {
+    player.gameboard.placeShipsRandom();
+  }
 }
