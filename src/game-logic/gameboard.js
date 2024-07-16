@@ -43,9 +43,6 @@ export class Gameboard {
 
   checkAllShipsSunk() {
     for (let ship in this.ships) {
-      //   console.log(this.ships);
-      //   console.log(ship);
-      //   console.log(this.ships[ship].isSunk());
       if (!this.ships[ship].isSunk()) return false;
     }
     return true;
