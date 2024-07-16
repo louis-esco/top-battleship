@@ -31,8 +31,8 @@ export class GameController {
   makeComputerPlay() {
     let attack = false;
     while (!attack) {
-      let x = Math.floor(Math.random() * 9);
-      let y = Math.floor(Math.random() * 9);
+      let x = Math.floor(Math.random() * 10);
+      let y = Math.floor(Math.random() * 10);
       attack = this.playRound(x, y);
     }
   }
