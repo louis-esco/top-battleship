@@ -81,15 +81,3 @@ test("Check if all ships sunk", () => {
 
   expect(battleship.checkAllShipsSunk()).toBe(true);
 });
-
-// test("Find ship", () => {
-//   battleship.placeShip("carrier", 1, 1, "xAxis");
-
-//   expect(battleship.findShip("carrier")).toEqual([
-//     [1, 1],
-//     [2, 1],
-//     [3, 1],
-//     [4, 1],
-//     [5, 1],
-//   ]);
-// });

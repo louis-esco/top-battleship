@@ -77,15 +77,6 @@ export class Gameboard {
     );
   }
 
-  findShip(shipName) {
-    let coordinates = [];
-    for (let i = 0; i < this.board.length; i++)
-      for (let j = 0; j < this.board.length; j++)
-        if (this.board[i][j].ship && this.board[i][j].ship.name === shipName)
-          coordinates.push([j, i]);
-    return coordinates;
-  }
-
   checkPositionValidity(shipName, x, y, axis) {
     if (
       axis === "xAxis" &&
