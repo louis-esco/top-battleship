@@ -29,7 +29,7 @@ export class GameController {
   }
 
   playRound(x, y) {
-    getOpponentPlayer().gameboard.receiveAttack(x, y);
+    this.getOpponentPlayer().gameboard.receiveAttack(x, y);
     if (!this.checkWinner()) this.switchPlayerTurn();
   }
 
@@ -38,8 +38,8 @@ export class GameController {
     return false;
   }
 
-  getPlayerBoard() {
-    return this.activePlayer.gameboard.board;
+  getPlayerBoard(player) {
+    return player.gameboard.board;
   }
 
   placeShipsRandomly(player) {
