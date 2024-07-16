@@ -36,6 +36,21 @@ export class Gameboard {
     return false;
   }
 
+  receiveAttack(x, y) {
+    if (this.board[y][x].isHit) return false;
+    return this.board[y][x].hitCell();
+  }
+
+  checkAllShipsSunk() {
+    for (let ship in this.ships) {
+      //   console.log(this.ships);
+      //   console.log(ship);
+      //   console.log(this.ships[ship].isSunk());
+      if (!this.ships[ship].isSunk()) return false;
+    }
+    return true;
+  }
+
   removeAllShips() {
     for (let i = 0; i < this.board.length; i++)
       for (let j = 0; j < this.board.length; j++) this.board[i][j].ship = null;
@@ -61,6 +76,7 @@ export class Gameboard {
       this.checkCellsAvailability(shipName, x, y, axis)
     );
   }
+
   findShip(shipName) {
     let coordinates = [];
     for (let i = 0; i < this.board.length; i++)

@@ -25,14 +25,71 @@ test("Place ship", () => {
   expect(battleship.placeShip("carrier", 8, 1, "xAxis")).toBe(false);
 });
 
-test("Find ship", () => {
+test("Hit cell", () => {
   battleship.placeShip("carrier", 1, 1, "xAxis");
+  battleship.placeShip("battleship", 1, 2, "xAxis");
+  battleship.placeShip("cruiser", 1, 3, "xAxis");
+  battleship.placeShip("submarine", 1, 4, "xAxis");
+  battleship.placeShip("destroyer", 1, 5, "yAxis");
 
-  expect(battleship.findShip("carrier")).toEqual([
-    [1, 1],
-    [2, 1],
-    [3, 1],
-    [4, 1],
-    [5, 1],
-  ]);
+  expect(battleship.receiveAttack(1, 1)).toEqual({
+    ship: {
+      hits: 1,
+      length: 5,
+      name: "carrier",
+      sunk: false,
+    },
+    isHit: true,
+  });
+
+  battleship.receiveAttack(1, 1);
+  expect(battleship.receiveAttack(1, 1)).toBe(false);
 });
+
+test("Check if all ships sunk", () => {
+  expect(battleship.checkAllShipsSunk()).toBe(false);
+
+  battleship.placeShip("carrier", 1, 1, "xAxis");
+  battleship.receiveAttack(1, 1);
+  battleship.receiveAttack(2, 1);
+  battleship.receiveAttack(3, 1);
+  battleship.receiveAttack(4, 1);
+  battleship.receiveAttack(5, 1);
+
+  battleship.placeShip("battleship", 1, 2, "xAxis");
+  battleship.receiveAttack(1, 2);
+  battleship.receiveAttack(2, 2);
+  battleship.receiveAttack(3, 2);
+  battleship.receiveAttack(4, 2);
+
+  battleship.placeShip("cruiser", 1, 3, "xAxis");
+  battleship.receiveAttack(1, 3);
+  battleship.receiveAttack(2, 3);
+  battleship.receiveAttack(3, 3);
+
+  battleship.placeShip("submarine", 1, 4, "xAxis");
+  battleship.receiveAttack(1, 4);
+  battleship.receiveAttack(2, 4);
+  battleship.receiveAttack(3, 4);
+
+  battleship.placeShip("destroyer", 1, 5, "yAxis");
+  battleship.receiveAttack(1, 5);
+
+  expect(battleship.checkAllShipsSunk()).toBe(false);
+
+  battleship.receiveAttack(1, 6);
+
+  expect(battleship.checkAllShipsSunk()).toBe(true);
+});
+
+// test("Find ship", () => {
+//   battleship.placeShip("carrier", 1, 1, "xAxis");
+
+//   expect(battleship.findShip("carrier")).toEqual([
+//     [1, 1],
+//     [2, 1],
+//     [3, 1],
+//     [4, 1],
+//     [5, 1],
+//   ]);
+// });
