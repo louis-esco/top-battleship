@@ -7,6 +7,11 @@ h1 {
   text-align: center;
 }
 
+.player-name,
+.game-status {
+  text-align: center;
+}
+
 .gameboards {
   display: flex;
   justify-content: space-around;
@@ -30,4 +35,31 @@ h1 {
   flex-direction: column;
   justify-content: space-evenly;
   text-align: center;
+}
+
+.grid-cells {
+  display: grid;
+  grid-template: repeat(10, 1fr) / repeat(10, 1fr);
+  gap: 1px;
+}
+
+.cell-btn {
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  background-color: #e2e8f0;
+  color: #ffffff;
+}
+
+.cell-btn:disabled {
+  cursor: auto;
+  background-color: #f1f5f9;
+}
+
+.cell-btn.empty-cell-hit {
+  background-color: #fde047;
+}
+
+.cell-btn.ship-cell-hit {
+  background-color: #ef4444;
 }
