@@ -71,7 +71,7 @@ function screenController() {
     const restartBtn = document.createElement("button");
     restartBtn.textContent = "Restart game";
     restartBtn.classList.add("game-btn");
-    restartBtn.addEventListener("click", placeShipScreen);
+    restartBtn.addEventListener("click", screenController);
     gameBtns.appendChild(restartBtn);
 
     updateGameScreen();
