@@ -4,7 +4,7 @@ export class GameController {
   constructor(playerOneName, playerOneType, playerTwoName, playerTwoType) {
     this.players = [
       new Player("Player One", "real"),
-      new Player("Player Two", "real"),
+      new Player("Computer", "computer"),
     ];
     this.activePlayer = this.players[0];
     this.opponentPlayer = this.players[1];
@@ -28,9 +28,17 @@ export class GameController {
     }
   }
 
+  makeComputerPlay() {
+    let attack = false;
+    while (!attack) {
+      let x = Math.floor(Math.random() * 9);
+      let y = Math.floor(Math.random() * 9);
+      attack = this.playRound(x, y);
+    }
+  }
+
   playRound(x, y) {
-    this.getOpponentPlayer().gameboard.receiveAttack(x, y);
-    if (!this.checkWinner()) this.switchPlayerTurn();
+    return this.getOpponentPlayer().gameboard.receiveAttack(x, y);
   }
 
   checkWinner() {
