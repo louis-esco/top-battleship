@@ -36,15 +36,6 @@ export class Gameboard {
     return false;
   }
 
-  findShip(shipName) {
-    let coordinates = [];
-    for (let i = 0; i < this.board.length; i++)
-      for (let j = 0; j < this.board.length; j++)
-        if (this.board[i][j].ship && this.board[i][j].ship.name === shipName)
-          coordinates.push([j, i]);
-    return coordinates;
-  }
-
   removeAllShips() {
     for (let i = 0; i < this.board.length; i++)
       for (let j = 0; j < this.board.length; j++) this.board[i][j].ship = null;
@@ -69,6 +60,14 @@ export class Gameboard {
       this.checkPositionValidity(shipName, x, y, axis) &&
       this.checkCellsAvailability(shipName, x, y, axis)
     );
+  }
+  findShip(shipName) {
+    let coordinates = [];
+    for (let i = 0; i < this.board.length; i++)
+      for (let j = 0; j < this.board.length; j++)
+        if (this.board[i][j].ship && this.board[i][j].ship.name === shipName)
+          coordinates.push([j, i]);
+    return coordinates;
   }
 
   checkPositionValidity(shipName, x, y, axis) {
