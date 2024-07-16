@@ -63,3 +63,16 @@ h1 {
 .cell-btn.ship-cell-hit {
   background-color: #ef4444;
 }
+
+.game-btns {
+  margin-top: 15px;
+}
+
+.game-btn {
+  margin-right: 10px;
+  background-color: #bfdbfe;
+  border: none;
+  padding: 8px;
+  border-radius: 5px;
+  cursor: pointer;
+}
