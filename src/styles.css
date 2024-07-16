@@ -1,0 +1,33 @@
+body {
+  font-family: system-ui, sans-serif;
+  margin: none;
+}
+
+h1 {
+  text-align: center;
+}
+
+.gameboards {
+  display: flex;
+  justify-content: space-around;
+}
+
+.grid {
+  height: 400px;
+  width: 400px;
+  display: grid;
+  grid-template: 1fr 10fr / 1fr 10fr;
+}
+
+.grid-letters {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.grid-numbers {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  text-align: center;
+}
